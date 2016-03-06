@@ -1,74 +1,186 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Network | Basic usage</title>
-
-    <script type="text/javascript" src="../dist/vis.js"></script>
-    <link href="../dist/vis.css" rel="stylesheet" type="text/css" />
-
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+    <script type="text/javascript" src="../dist/vis.js"></script> <!-- network handling framework -->
+    <link href="../dist/vis.css" rel="stylesheet" type="text/css"/>
     <style type="text/css">
-        #mynetwork {
-            width: 600px;
-            height: 400px;
+        #network{
+            width: 1200px;
+            height: 800px;
             border: 1px solid lightgray;
         }
     </style>
 </head>
 <body>
-
-<p>
-    Create a simple network with some nodes and edges.
-</p>
-
-<div id="mynetwork"></div>
+<h1>Network Test</h1>
+<div id="network"></div>
 
 <script type="text/javascript">
-    var nodes = new vis.DataSet()
-    nodes.add({id:'A', label:"A", x:0, y:0})
-    nodes.add({id:'B', label:"B", x:100, y:0})
-    nodes.add({id:'C', label:"C", x:200, y:0})
-    nodes.add({id:'D', label:"D", x:0, y:100})
-    nodes.add({id:'E', label:"E", x:100, y:100})
-    nodes.add({id:'F', label:"F", x:200, y:100})
-    nodes.add({id:'G', label:"G", x:-100, y:200})
+    // create a network
+    var container = document.getElementById('network');
+    var data = {
+        nodes: [{
+            "id": "59acc308-fc78-11e3-a451-005056967662_1",
+            "level": 1,
+            "shape": "box",
+            "label": "737464  (HALB)\nLenks\u00e4ule\n0 | M1182 - TK-PF\n0 | M2676 - TK-PF",
+        }, {
+            "id": "bc5ada61-e297-11e3-a03f-005056967662_2",
+            "level": 2,
+            "shape": "box",
+            "label": "578647 C (HALB)\nF\u00fchrungskasten komplett\n0000 | M2731 - TK-PF",
+        }, {
+            "id": "6f8a780a-e28e-11e3-a03f-005056967662_2",
+            "level": 2,
+            "shape": "box",
+            "label": "615430 C (HALB)\nF\u00fchrungskasten komplett\n0000 | M2781 - TK-PF\n0000 | M2788 - TK-PF",
+        }, {
+            "id": "49bb72b1-e2b2-11e3-a03f-005056967662_2",
+            "level": 2,
+            "shape": "box",
+            "label": "678478 D (HALB)\nF\u00fchrungskasten montiert\n0 | M1085 - TK-PFC",
+        }, {
+            "id": "e7bf7c7e-e28e-11e3-a03f-005056967662_2",
+            "level": 2,
+            "shape": "box",
+            "label": "727672 B (HALB)\nF\u00fchrungskasten komplett\n0 | M9999 - TK-PTH\n0000 | M1155 - TK-PTH",
+        }, {
+            "id": "623e8501-e2e2-11e3-a03f-005056967662_2",
+            "level": 2,
+            "shape": "box",
+            "label": "760550 A (HALB)\nF\u00fchrungskasten komplett\n0000 | M1556 - TK-PHS",
+        }, {
+            "id": "e7c6dcdf-e28e-11e3-a03f-005056967662_2",
+            "level": 2,
+            "shape": "box",
+            "label": "793641 A (HALB)\nF\u00fchrungskasten komplett\n0000 | M1155 - TK-PTH",
+        }, {
+            "id": "623edd04-e2e2-11e3-a03f-005056967662_2",
+            "level": 2,
+            "shape": "box",
+            "label": "802797 A (HALB)\nF\u00fchrungskasten komplett\n0 | M1556 - TK-PHS",
+        }, {
+            "id": "a986a9ab-fc82-11e3-a451-005056967662_2",
+            "level": 2,
+            "shape": "box",
+            "label": "821943  (HALB)\nF\u00fchrungskasten komplett\n0 | M2781 - TK-PF",
+        }, {
+            "id": "c22dda1e-fc84-11e3-a451-005056967662_2",
+            "level": 2,
+            "shape": "box",
+            "label": "821944  (HALB)\nF\u00fchrungskasten komplett\n0 | M2781 - TK-PF",
+        }, {
+            "id": "a05fcb83-29c6-11e4-9203-005056967662_2",
+            "level": 2,
+            "shape": "box",
+            "label": "828431  (HALB)\nF\u00fchrungskasten komplett",
+        }, {
+            "id": "eb9b67b7-6e3f-11e4-9203-005056967662_2",
+            "level": 2,
+            "shape": "box",
+            "label": "829382 A (HALB)\nF\u00fchrungskasten komplett\n0 | M1556 - TK-PHS",
+        }, {
+            "id": "084ec1e3-e447-11e3-a03f-005056967662_3",
+            "level": 3,
+            "shape": "box",
+            "color": "#00ff00",
+            "label": "310759 C (ROH)\nSchr\u00e4gkugellager",
+        }],
+        edges: [{
+            "from": "59acc308-fc78-11e3-a451-005056967662_1",
+            "to": "a986a9ab-fc82-11e3-a451-005056967662_2"
+        }, {
+            "from": "bc5ada61-e297-11e3-a03f-005056967662_2",
+            "to": "084ec1e3-e447-11e3-a03f-005056967662_3"
+        }, {
+            "from": "6f8a780a-e28e-11e3-a03f-005056967662_2",
+            "to": "084ec1e3-e447-11e3-a03f-005056967662_3"
+        }, {
+            "from": "49bb72b1-e2b2-11e3-a03f-005056967662_2",
+            "to": "084ec1e3-e447-11e3-a03f-005056967662_3"
+        }, {
+            "from": "e7bf7c7e-e28e-11e3-a03f-005056967662_2",
+            "to": "084ec1e3-e447-11e3-a03f-005056967662_3"
+        }, {
+            "from": "623e8501-e2e2-11e3-a03f-005056967662_2",
+            "to": "084ec1e3-e447-11e3-a03f-005056967662_3"
+        }, {
+            "from": "e7c6dcdf-e28e-11e3-a03f-005056967662_2",
+            "to": "084ec1e3-e447-11e3-a03f-005056967662_3"
+        }, {
+            "from": "623edd04-e2e2-11e3-a03f-005056967662_2",
+            "to": "084ec1e3-e447-11e3-a03f-005056967662_3"
+        }, {
+            "from": "a986a9ab-fc82-11e3-a451-005056967662_2",
+            "to": "084ec1e3-e447-11e3-a03f-005056967662_3"
+        }, {
+            "from": "c22dda1e-fc84-11e3-a451-005056967662_2",
+            "to": "084ec1e3-e447-11e3-a03f-005056967662_3"
+        }, {
+            "from": "a05fcb83-29c6-11e4-9203-005056967662_2",
+            "to": "084ec1e3-e447-11e3-a03f-005056967662_3"
+        }, {
+            "from": "eb9b67b7-6e3f-11e4-9203-005056967662_2",
+            "to": "084ec1e3-e447-11e3-a03f-005056967662_3"
+        }]
+    };
+    var ids = {};
 
-    var edges = new vis.DataSet()
-    edges.add({id:'1', from:"A", to:"B"})
-    edges.add({id:'2', from:"B", to:"C"})
-    edges.add({id:'3', from:"D", to:"E"})
-    edges.add({id:'4', from:"E", to:"F"})
-    edges.add({id:'5', from:"D", to:"G"})
+    for ( var i = 0; i < data.nodes.length; i++) {
+        ids[data.nodes[i].id] = i;
+        data.nodes[i].id = i
+        data.nodes[i].label = i
+    }
 
-    var options = {physics:false, edges:{smooth:false}};
-    var network = new vis.Network(document.getElementById("mynetwork"), {
-        nodes: nodes,
-        edges: edges
-    }, options)
+    for ( var i = 0; i < data.edges.length; i++) {
+        data.edges[i].from = ids[data.edges[i].from]
+        data.edges[i].to = ids[data.edges[i].to]
+    }
+    var options = {
 
-    console.log("MAKE C1")
-    network.cluster({
-        joinCondition:function(nodeOptions) {
-            return nodeOptions.id == "B" || nodeOptions.id == "E";
+        layout: {
+            hierarchical: {
+                //enabled: true,
+
+                nodeSpacing: 100,
+
+                //blockShifting: false,
+                //edgeMinimization: false,
+
+                direction: 'UD',
+                sortMethod: 'directed'
+
+            },
+
         },
-        clusterNodeProperties: {id:'C1', label:"C1"}
-    })
 
-    console.log("MAKE C2")
-    network.cluster({
-        joinCondition:function(nodeOptions) {
-            return nodeOptions.id == "D" || nodeOptions.id == "G";
+        interaction: {
+            dragNodes: true,
+            hover: true
         },
-        clusterNodeProperties: {id:'C2', label:"C2"}
-    })
 
-    network.openCluster('C1', {
-        releaseFunction: function (cpos, npos) {
-            console.log(npos)
-            return npos;
+        physics: {
+            enabled: false
         }
-    })
+
+    };
+    var network = new vis.Network(container, data, options);
+
+    network.on('click', function(params) {
+        if (params.nodes !== undefined) {
+            var firstNode = params.nodes[0];
+            if (firstNode !== undefined) {
+                var splitted = firstNode.split('_');
+
+                Lisp.request.get('/dataStore/article/detail/id/' + splitted[0]);
+            }
+        }
+    });
+
+
 
 </script>
-
 </body>
 </html>
